@@ -1,0 +1,17 @@
+{
+  "name": "bucket-generator",
+  "module": "index.ts",
+  "type": "module",
+  "devDependencies": {
+    "@types/bun": "^1.0.6",
+    "@types/inquirer": "^9.0.7"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.1562.0",
+    "inquirer": "^9.2.15",
+    "zod": "^3.22.4"
+  }
+}
