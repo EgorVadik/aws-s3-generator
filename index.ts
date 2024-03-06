@@ -10,6 +10,7 @@ import {
     customPolicyPrompt,
     createPolicy,
     customPolicyNamePrompt,
+    createBucketFolders,
 } from './utils'
 import fs from 'fs'
 ;(async () => {
@@ -78,6 +79,11 @@ import fs from 'fs'
             region,
         })
         console.log('Public bucket policy created!')
+
+        await createBucketFolders({
+            bucketName,
+            region,
+        })
     }
 
     console.log('\n-----------------------------------\n')

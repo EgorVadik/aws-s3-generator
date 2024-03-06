@@ -150,7 +150,7 @@ export const attachPublicBucketPolicy = async ({
                         Effect: 'Allow',
                         Principal: '*',
                         Action: ['s3:GetObject'],
-                        Resource: [`arn:aws:s3:::${bucketName}/*`],
+                        Resource: [`arn:aws:s3:::${bucketName}/public/*`],
                     },
                 ],
             }),
@@ -246,8 +246,7 @@ export const userBucketPrompt = async () => {
             type: 'confirm',
             name: 'allowPublicRead',
             message:
-                'Would you like to allow public read access? (default: false)',
-            default: false,
+                'Would you like to allow public read access? (Public will create 2 folders: public/ and private/)',
         },
         {
             type: 'input',
@@ -328,4 +327,27 @@ export const customPolicyPrompt = async () => {
             },
         },
     ])
+}
+
+export const createBucketFolders = async ({
+    bucketName,
+    region,
+}: {
+    bucketName: string
+    region?: string
+}) => {
+    const s3 = createS3Object({ region })
+    await s3
+        .putObject({
+            Bucket: bucketName,
+            Key: `public/`,
+        })
+        .promise()
+
+    await s3
+        .putObject({
+            Bucket: bucketName,
+            Key: `private/`,
+        })
+        .promise()
 }
